@@ -2,7 +2,6 @@ import { RabbitMQ } from './rascal'
 
 interface IResponse {
 	eventName: string
-	prefix: string
 	data: any
 }
 
