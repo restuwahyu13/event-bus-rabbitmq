@@ -2,20 +2,20 @@ import { RabbitMQ } from './rascal'
 
 interface IBusEvent {
 	eventName: string
-	prefix: string
 	data: any
 }
 
 class BusEvent {
 	static event(): void {
-		const sub: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
+		const sub: InstanceType<typeof RabbitMQ> = new RabbitMQ('sub:bus', 'event')
+
 		sub.subscriber(async (content: IBusEvent, err: Error) => {
 			if (!err && content) {
-				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ(content.eventName, content.prefix)
+				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('pub:bus', 'event')
 				const pub: boolean = await broker.publisher(content)
 
-				if (pub) console.info(`send event to ${content.eventName}:${content.prefix} success`)
-				else console.error(`send event to ${content.eventName}:${content.prefix} failed`)
+				if (pub) console.info(`send event to ${content.eventName} success`)
+				else console.error(`send event to ${content.eventName} failed`)
 
 				console.info('subscriber data success')
 			} else {
