@@ -47,8 +47,8 @@ class OrderService {
 				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 				const pub: boolean = await broker.publisher(orderData)
 
-				if (pub) console.info(`order product processed success - ${new Date().toISOString()}: `, orderData)
-				else console.error(`order product processed failed - ${new Date().toISOString()}: `, orderData)
+				if (pub) console.info(`order product processed success - ${new Date().toISOString()}: `, getProduct)
+				else console.error(`order product processed failed - ${new Date().toISOString()}: `, getProduct)
 			}
 		})
 	}
