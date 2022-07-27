@@ -20,7 +20,7 @@ class OrderService {
 	}
 
 	static async handler(): Promise<void> {
-		const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('sub:bus', 'event')
+		const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 
 		broker.subscriber(async (content: IResponse, err: Error) => {
 			if (!err && content && content.eventName === 'product-service') {
@@ -43,7 +43,7 @@ class OrderService {
 					}
 				}
 
-				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('pub:bus', 'event')
+				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 				const pub: boolean = await broker.publisher(orderData)
 
 				if (pub) console.info(`order product processed success - ${new Date().toISOString()}: `, getProduct)

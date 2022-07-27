@@ -10,7 +10,7 @@ class ProductService {
 	]
 
 	static async handler(): Promise<void> {
-		const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('pub:bus', 'event')
+		const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 		const pub: boolean = await broker.publisher({ eventName: 'product-service', data: ProductService.products })
 
 		if (pub) console.info(`publish product data success - ${new Date().toISOString()}`)

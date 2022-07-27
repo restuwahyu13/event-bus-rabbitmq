@@ -7,7 +7,7 @@ interface IResponse {
 
 class ShippingOrder {
 	static async handler(): Promise<void> {
-		const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('sub:bus', 'event')
+		const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 
 		broker.subscriber(async (content: IResponse, err: Error) => {
 			if (!err && content && content.eventName === 'order-service') {

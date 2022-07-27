@@ -7,11 +7,11 @@ interface IBusEvent {
 
 class BusEvent {
 	static event(): void {
-		const sub: InstanceType<typeof RabbitMQ> = new RabbitMQ('sub:bus', 'event')
+		const sub: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 
 		sub.subscriber(async (content: IBusEvent, err: Error) => {
 			if (!err && content) {
-				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('pub:bus', 'event')
+				const broker: InstanceType<typeof RabbitMQ> = new RabbitMQ('bus', 'event')
 				const pub: boolean = await broker.publisher(content)
 
 				if (pub) console.info(`send event to ${content.eventName} success`)
