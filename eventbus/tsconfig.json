@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "ESNext",
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"esModuleInterop": true,
+		"downlevelIteration": true,
+		"skipLibCheck": true,
+		"importHelpers": true,
+		"allowUmdGlobalAccess": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
+}
